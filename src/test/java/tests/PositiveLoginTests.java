@@ -1,16 +1,20 @@
 package tests;
 
+import driver.manager.DriverUtils;
 import org.testng.annotations.Test;
 import page.objects.FooterPage;
 import page.objects.LandingPage;
 import page.objects.LoginPage;
 import page.objects.TopMenuPage;
+
 import static org.testng.Assert.assertTrue;
+import static navigation.ApplicationURLS.LOGIN_URL;
 
 public class PositiveLoginTests extends TestBase {
 
     @Test
     public void asUserLoginUsingValidLoginAndPassword() {
+        DriverUtils.navigateToPage(LOGIN_URL);
 
         LandingPage landingPage = new LandingPage();
         landingPage.clickOnEnterStoreLink();

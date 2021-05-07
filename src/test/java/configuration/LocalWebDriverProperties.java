@@ -1,35 +1,22 @@
 package configuration;
 
-import org.apache.logging.log4j.LogManager;
 
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.logging.Logger;
+import driver.manager.BrowserType;
 
 public class LocalWebDriverProperties {
-    //W klasie znajduje się tylko jedna metoda. Służy ona do odczytywania właściwości z zadanego pliku properties
-    private Logger logger = LogManager.getLogger(PropertiesLoader.class);
+    //LocalWebDriverProperties – klasa będzie dostarczała właściwości związanych z ścieżkami do plików *.exe oraz przeglądarki, na której ma być uruchomiony test
 
-    public Properties getPropertiesFromFile(String propertiesFileName) {
+    // Metody zwracają właściwości dla poszczególnych kluczy, analogicznie jak w przypadku AppProperties
 
-        // Utworzenie obiektu InputStream służacy do odczytania pliku properties
-        InputStream inputStream = null;
+    public static BrowserType getLocalBrowser() {
+        return BrowserType.valueOf(ConfigurationProperties.getProperties().getProperty("local.browser"));
+    }
 
-        //Obiekt Properties będzie przechowywał właściwości
-        Properties properties = new Properties();
-        try {
-            logger.info("Trying to load propertis with file name: " + propertiesFileName);
+    public static String getChromeWebDriverLocation() {
+        return ConfigurationProperties.getProperties().getProperty("chrome.driver.location");
+    }
 
-            //Odczytujemy plik properties i inicjalizujemy obiekt inputStream
-            inputStream.getClass().getClassLoader().getResourceAsStream(propertiesFileName);
-
-            //Jeśli plik properties by nie istniał, obiekt inputStream będzie null-em. W związku z czym
-            // zostanie rzucony wyjątek FileNotFoundException
-
-            if (inputStream!=null){
-                // ładujemy 
-            }
-
-
+    public static String getFirefoxWebDriverLocation() {
+        return ConfigurationProperties.getProperties().getProperty("firefox.driver.location");
     }
 }
